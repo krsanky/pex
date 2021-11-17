@@ -21,3 +21,24 @@ Requirements:
 * The API should also be able to recover and restart if it unexpectedly crashes.
 * Assume that the API will be running on a small machine with 1 CPU and 512MB of RAM.
 * You may use any programming language/framework of your choice.
+
+---
+
+1. next increments, current ... does previous decrement it?
+2. is there common state, or state per client?
+
+---
+
+https://github.com/tsenart/vegeta
+https://github.com/alexedwards/scs
+
+
+--
+Assumptions:
+1. State is per client.
+	Otherwise multiple clients are racing each other, and is the req/resp
+	cycle atomic to handle that.
+	If there is common state, then wrap the current -> next transition in a semaphore.
+2. /current/ sets session and starts current at 0.
+3. cookies are OK for session.
+
