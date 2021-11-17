@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/pelletier/go-toml"
+	"go.d34d.net/pex/db"
 	"go.d34d.net/pex/server"
 )
 
@@ -30,12 +31,13 @@ func main() {
 			panic(err)
 		}
 
-		//db.Init(settings)
+		db.Init(settings)
 
 		mux := http.NewServeMux()
 		mux.HandleFunc("/", Index)
 		server := server.NewServer(settings, mux)
 
+		fmt.Println("server.ServeDev()...")
 		server.ServeDev()
 	} else {
 		usage()
