@@ -29,9 +29,11 @@ Requirements:
 
 ---
 
-https://github.com/tsenart/vegeta
-https://github.com/alexedwards/scs
+- <https://github.com/tsenart/vegeta>
+- <https://github.com/alexedwards/scs>
 
+- <https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Fibonacci_Number_Program>
+- <https://medium.com/future-vision/fibonacci-sequence-algorithm-5eebae4e85be>
 
 --
 Assumptions:
