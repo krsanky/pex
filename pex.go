@@ -34,7 +34,7 @@ func testIndex(w http.ResponseWriter, r *http.Request) {
 	}
 
 	mp := make(map[string]interface{})
-	mp["pex"] = true
+	mp["pex-fib"] = sstr
 	bs, _ := json.Marshal(mp)
 
 	w.Write(bs)
