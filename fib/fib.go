@@ -50,7 +50,11 @@ func main() {
 	fmt.Println(f(), f(), f(), f(), f())
 }
 
+// -1 means error   
 func FibonacciLoop(n int) int {
+	if n < 0 {
+		return -1
+	}
 	f := make([]int, n+1, n+2)
 	if n < 2 {
 		f = f[0:2]
