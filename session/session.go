@@ -14,13 +14,14 @@ var Session *scs.Session
 func Init(db *sql.DB) {
 	lg.Log.Printf("session.Init()")
 	Session = scs.New()
-	lg.Log.Printf("session.Init() 32")
-	Session.Store = postgresstore.New(db)
-	lg.Log.Printf("session.Init() 34")
 
 	Session.Cookie.Name = "_pex_sess_"
 	Session.Cookie.Persist = true
 	lg.Log.Printf("session.Init()...")
+
+	lg.Log.Printf("session.Init() 32")
+	Session.Store = postgresstore.New(db)
+	lg.Log.Printf("session.Init() 34")
 }
 
 func GetWithDefault(r *http.Request, key string, def string) (value string, err error) {

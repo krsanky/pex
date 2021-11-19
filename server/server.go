@@ -1,12 +1,14 @@
 package server
 
 import (
+	"database/sql"
 	"fmt"
 	"net"
 	"net/http"
 	"net/http/fcgi"
 
 	"github.com/pelletier/go-toml"
+	"go.d34d.net/pex/session"
 )
 
 type Server struct {
@@ -21,17 +23,10 @@ func NewServer(settings *toml.Tree, h http.Handler) *Server {
 	return &s
 }
 
-/*
-// Add routes to mux before calling this
-func (s *Server) SetupHandler() {
-	// ORDER MATTERS and it's kind of reversed
-	h := nosurf.NewPure(s.Handler)
-	h = account.AddUser(h)
-	//session.Init()
-	//h = session.Session.LoadAndSave(h)
-	s.Handler = h
+func (s *Server) AddSessionHandler(db *sql.DB) {
+	session.Init(db)
+	s.Handler = session.Session.LoadAndSave(s.Handler)
 }
-*/
 
 func (s *Server) Serve() {
 	port := s.Settings.Get("server.port").(int64)
@@ -41,16 +36,17 @@ func (s *Server) Serve() {
 	if err != nil {
 		panic(err)
 	}
+
+	/*
+	   srv := &http.Server{
+	       ReadTimeout: 5 * time.Second,
+	       WriteTimeout: 10 * time.Second,
+	   }
+	   srv.ListenAndServe()
+	*/
+
 	fcgi.Serve(listener, s.Handler)
 }
-
-/*
-rv := &http.Server{
-    ReadTimeout: 5 * time.Second,
-    WriteTimeout: 10 * time.Second,
-}
-log.Println(srv.ListenAndServe())
-*/
 
 func (s *Server) ServeDev() {
 	port := s.Settings.Get("server.port").(int64)

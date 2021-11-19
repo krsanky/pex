@@ -1,3 +1,4 @@
+#settings.toml # settings.toml.example
 *.zip
 *.py
 log.txt
