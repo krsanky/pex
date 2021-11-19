@@ -50,3 +50,8 @@ previous -> 1
 ~~~
 echo "GET http://localhost:8080/" | vegeta attack -duration=5s | vegeta report
 ~~~
+
+---
+
+curl -c cookies.txt "http://127.0.0.1:8080/next"
+curl -b cookies.txt "http://127.0.0.1:8080/next"
