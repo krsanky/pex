@@ -21,8 +21,8 @@ func NewServer(settings *toml.Tree, h http.Handler) *Server {
 	return &s
 }
 
-// Add routes to mux before calling this
 /*
+// Add routes to mux before calling this
 func (s *Server) SetupHandler() {
 	// ORDER MATTERS and it's kind of reversed
 	h := nosurf.NewPure(s.Handler)
