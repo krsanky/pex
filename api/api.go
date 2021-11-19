@@ -1,4 +1,4 @@
-package pex
+package api
 
 import (
 	"encoding/json"
@@ -6,19 +6,19 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/pelletier/go-toml"
-	"go.d34d.net/pex/api"
-	"go.d34d.net/pex/db"
 	"go.d34d.net/pex/lg"
-	"go.d34d.net/pex/server"
 	"go.d34d.net/pex/session"
 )
+
+func AddRoutes(m *http.ServeMux) {
+	m.HandleFunc("/api", testIndex)
+}
 
 func testIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	// test session
-	skey := "pex-api-test-session-key"
+	skey := "pex-fib"
 	sstr := session.Session.GetString(r.Context(), skey)
 	lg.Log.Printf("sstr:%s", sstr)
 	if sstr == "" {
@@ -28,27 +28,14 @@ func testIndex(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			lg.Log.Printf("pex.Index ERR:%v", err)
 		} else {
-			i += 1
+			i += i
 			session.Session.Put(r.Context(), skey, fmt.Sprintf("%d", i))
 		}
 	}
 
 	mp := make(map[string]interface{})
-	mp["pex"] = true
+	mp["pex:testIndex"] = true
 	bs, _ := json.Marshal(mp)
 
 	w.Write(bs)
-}
-
-func Web(settings *toml.Tree) {
-	db.Init(settings)
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", testIndex)
-	api.AddRoutes(mux)
-	server := server.NewServer(settings, mux)
-
-	server.AddSessionHandler(db.DB)
-
-	fmt.Println("server.ServeDev()...")
-	server.ServeDev()
 }

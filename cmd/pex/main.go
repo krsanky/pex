@@ -18,7 +18,7 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		pex.API(settings)
+		pex.Web(settings)
 	} else {
 		usage()
 	}
