@@ -9,6 +9,9 @@ var BigFibs [](*big.Int)
 var BigFibIdx int64
 
 func FibRec(n int) int {
+	if n < 0 {
+		return -1
+	}
 	if n <= 1 {
 		return n
 	}
@@ -33,7 +36,25 @@ func FibonacciLoop(n_ int) int64 {
 	return f[n]
 }
 
-//func BigFib(n
+func BigFib(n int) *big.Int {
+	if n < 0 {
+		return big.NewInt(-1)
+	}
+	fibs := make([](*big.Int), n+1, n+2)
+	if n < 2 {
+		fibs = fibs[0:2]
+	}
+	fibs[0] = big.NewInt(0)
+	fibs[1] = big.NewInt(1)
+
+	for i := 2; i <= n; i++ {
+		fib := &big.Int{}
+		fib.Add(fibs[i-1], fibs[i-2])
+		fmt.Printf("fib:%v\n", fib)
+		fibs[i] = fib
+	}
+	return fibs[n]
+}
 
 /*
 #

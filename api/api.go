@@ -40,8 +40,10 @@ func next(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	idx := cookie.GetFibIdx(r)
+	lg.Log.Printf("get cookie:%d", idx)
 	idx += 1
 	fib := fib.FibonacciLoop(idx)
+	lg.Log.Printf("fib := fib.FibonacciLoop(idx):%d", idx)
 	cookie.SetFibIdx(w, idx)
 
 	mp := make(map[string]interface{})
