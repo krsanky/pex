@@ -1,14 +1,12 @@
 package server
 
 import (
-	"database/sql"
 	"fmt"
 	"net"
 	"net/http"
 	"net/http/fcgi"
 
 	"github.com/pelletier/go-toml"
-	"go.d34d.net/pex/session"
 )
 
 type Server struct {
@@ -21,11 +19,6 @@ func NewServer(settings *toml.Tree, h http.Handler) *Server {
 	s.Settings = settings
 	s.Handler = h
 	return &s
-}
-
-func (s *Server) AddSessionHandler(db *sql.DB) {
-	session.Init(db)
-	s.Handler = session.Session.LoadAndSave(s.Handler)
 }
 
 func (s *Server) Serve() {
