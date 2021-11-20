@@ -73,6 +73,9 @@ func BigFib(n int) *big.Int {
 }
 
 func MemoFib(n int) *big.Int {
+	if n < 0 {
+		return big.NewInt(-1)
+	}
 	EnsureFibs(n)
 	return Fib.Vals[n]
 }
