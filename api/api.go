@@ -2,7 +2,9 @@ package api
 
 import (
 	"encoding/json"
+	"math/rand"
 	"net/http"
+	"time"
 
 	"go.d34d.net/pex/cookie"
 	"go.d34d.net/pex/fib"
@@ -16,6 +18,11 @@ func AddRoutes(m *http.ServeMux) {
 	m.HandleFunc("/current", current)
 	m.HandleFunc("/next", next)
 	m.HandleFunc("/previous", previous)
+	m.HandleFunc("/random", random)
+}
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
 }
 
 // Get the current index and corresponding fibonacci
@@ -71,6 +78,21 @@ func previous(w http.ResponseWriter, r *http.Request) {
 	if idx >= 0 {
 		cookie.SetFibIdx(w, idx)
 	}
+
+	mp := make(map[string]interface{})
+	mp["idx"] = idx
+	mp["fib"] = fib
+	bs, _ := json.Marshal(mp)
+
+	w.Write(bs)
+}
+
+// This is for testing, without having to worry about cookies.
+func random(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	idx := rand.Intn(1000)
+	fib := fib.MemoFib(idx)
 
 	mp := make(map[string]interface{})
 	mp["idx"] = idx
