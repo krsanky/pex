@@ -1,8 +1,8 @@
 package pex
 
 import (
-	"encoding/json"
 	"fmt"
+	"html/template"
 	"net/http"
 
 	"github.com/pelletier/go-toml"
@@ -10,22 +10,17 @@ import (
 	"go.d34d.net/pex/server"
 )
 
-func testIndex(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
-	mp := make(map[string]interface{})
-	mp["pex-fib"] = "12312312"
-	bs, _ := json.Marshal(mp)
-
-	w.Write(bs)
+func index(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("index.html"))
+	tmpl.Execute(w, nil)
 }
 
 func Web(settings *toml.Tree) {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", testIndex)
+	mux.HandleFunc("/", index)
 	api.AddRoutes(mux)
 	server := server.NewServer(settings, mux)
 
-	fmt.Println("server.ServeDev()...")
+	fmt.Printf("server.ServeDev() port:%d\n", settings.Get("server.port").(int64))
 	server.ServeDev()
 }

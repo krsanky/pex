@@ -16,7 +16,7 @@ var Fib FibsStore
 func init() {
 	Fib.Lock()
 	defer Fib.Unlock()
-	n := 100
+	n := 1000
 	Fib.Vals = make([](*big.Int), n)
 	Fib.Vals[0] = big.NewInt(0)
 	Fib.Vals[1] = big.NewInt(1)
@@ -25,16 +25,12 @@ func init() {
 		fib.Add(Fib.Vals[i-1], Fib.Vals[i-2])
 		Fib.Vals[i] = fib
 	}
-	fmt.Printf("len Fib.Vals:%d\n", len(Fib.Vals))
+	////fmt.Printf("len Fib.Vals:%d\n", len(Fib.Vals))
 
-	f100 := &big.Int{}
-	f100.Add(Fib.Vals[100-1], Fib.Vals[100-2])
-	Fib.Vals = append(Fib.Vals, f100)
-	fmt.Printf("-len Fib.Vals:%d\n", len(Fib.Vals))
-
-	// len Fib.Vals:100
-	// -len Fib.Vals:101
-
+	//f100 := &big.Int{}
+	//f100.Add(Fib.Vals[100-1], Fib.Vals[100-2])
+	//Fib.Vals = append(Fib.Vals, f100)
+	////fmt.Printf("-len Fib.Vals:%d\n", len(Fib.Vals))
 }
 
 func EnsureFibs(n int) {
