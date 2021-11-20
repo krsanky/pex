@@ -1,6 +1,12 @@
 package fib
 
-import "fmt"
+import (
+	"fmt"
+	"math/big"
+)
+
+var BigFibs [](*big.Int)
+var BigFibIdx int64
 
 func FibRec(n int) int {
 	if n <= 1 {
@@ -9,10 +15,30 @@ func FibRec(n int) int {
 	return FibRec(n-1) + FibRec(n-2)
 }
 
+// -1 means error
+func FibonacciLoop(n_ int) int64 {
+	n := int64(n_)
+	if n < 0 {
+		return -1
+	}
+	f := make([]int64, n+1, n+2)
+	if n < 2 {
+		f = f[0:2]
+	}
+	f[0] = 0
+	f[1] = 1
+	for i := int64(2); i <= n; i++ {
+		f[i] = f[i-1] + f[i-2]
+	}
+	return f[n]
+}
+
+//func BigFib(n
+
 /*
-# 
+#
 # Fast doubling Fibonacci algorithm (Python)
-# 
+#
 # (Public) Returns F(n).
 def fibonacci(n):
 	if n < 0:
@@ -48,21 +74,4 @@ func main() {
 	f := fib()
 	// Function calls are evaluated left-to-right.
 	fmt.Println(f(), f(), f(), f(), f())
-}
-
-// -1 means error   
-func FibonacciLoop(n int) int {
-	if n < 0 {
-		return -1
-	}
-	f := make([]int, n+1, n+2)
-	if n < 2 {
-		f = f[0:2]
-	}
-	f[0] = 0
-	f[1] = 1
-	for i := 2; i <= n; i++ {
-		f[i] = f[i-1] + f[i-2]
-	}
-	return f[n]
 }

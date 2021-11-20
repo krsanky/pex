@@ -8,6 +8,7 @@ import (
 
 	"github.com/pelletier/go-toml"
 	"go.d34d.net/pex/api"
+	"go.d34d.net/pex/cookie"
 	"go.d34d.net/pex/db"
 	"go.d34d.net/pex/lg"
 	"go.d34d.net/pex/server"
@@ -15,7 +16,9 @@ import (
 )
 
 func testIndex(w http.ResponseWriter, r *http.Request) {
+	cookie.AddCookie(w, "asd asd")
 	w.Header().Set("Content-Type", "application/json")
+	cookie.GetCookie(r)
 
 	// test session
 	skey := "pex-api-test-session-key"
@@ -32,6 +35,7 @@ func testIndex(w http.ResponseWriter, r *http.Request) {
 			session.Session.Put(r.Context(), skey, fmt.Sprintf("%d", i))
 		}
 	}
+
 
 	mp := make(map[string]interface{})
 	mp["pex-fib"] = sstr

@@ -96,7 +96,7 @@ func previous(w http.ResponseWriter, r *http.Request) {
 	}
 	fib := fib.FibonacciLoop(idx)
 	lg.Log.Printf("fib:%d", fib)
-	if idx >=  0 {
+	if idx >= 0 {
 		session.Session.Put(r.Context(), FibIdxSessKey, idx)
 	}
 
