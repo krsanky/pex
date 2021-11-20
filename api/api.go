@@ -29,7 +29,7 @@ func current(w http.ResponseWriter, r *http.Request) {
 
 	mp := make(map[string]interface{})
 	mp["idx"] = idx
-	mp["fib"] = fib.FibonacciLoop(idx)
+	mp["fib"] = fib.MemoFib(idx)
 	bs, _ := json.Marshal(mp)
 
 	w.Write(bs)
@@ -42,8 +42,8 @@ func next(w http.ResponseWriter, r *http.Request) {
 	idx := cookie.GetFibIdx(r)
 	lg.Log.Printf("get cookie:%d", idx)
 	idx += 1
-	fib := fib.FibonacciLoop(idx)
-	lg.Log.Printf("fib := fib.FibonacciLoop(idx):%d", idx)
+	fib := fib.MemoFib(idx)
+	lg.Log.Printf("fib := fib.MemoFib(idx):%d", idx)
 	cookie.SetFibIdx(w, idx)
 
 	mp := make(map[string]interface{})
@@ -66,7 +66,7 @@ func previous(w http.ResponseWriter, r *http.Request) {
 	if idx < -1 {
 		idx = -1
 	}
-	fib := fib.FibonacciLoop(idx)
+	fib := fib.MemoFib(idx)
 	lg.Log.Printf("fib:%d", fib)
 	if idx >= 0 {
 		cookie.SetFibIdx(w, idx)
