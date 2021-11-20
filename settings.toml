@@ -6,9 +6,3 @@ port = 8080
 #ip = "127.0.0.1"
 #port = 8083
 
-[db]
-password = "devdb9000"
-user = "devdb"
-name = "devdb"
-
-
