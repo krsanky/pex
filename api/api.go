@@ -11,9 +11,6 @@ import (
 	"github.com/krsanky/pex/lg"
 )
 
-//  0-based index into the fibonacci sequence.
-var FibIdxSessKey string = "pex-fib-idx"
-
 func AddRoutes(m *http.ServeMux) {
 	m.HandleFunc("/current", current)
 	m.HandleFunc("/next", next)
