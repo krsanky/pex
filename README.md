@@ -42,8 +42,6 @@ previous -> 1
 	Otherwise multiple clients are racing each other, and is the req/resp
 	cycle atomic to handle that.
 	If there is common state, then wrap the current -> next transition in a semaphore.
-2. /current/ sets session and starts current at 0.
-3. cookies are OK for session.
 
 ## Testing
 
@@ -53,9 +51,11 @@ echo "GET http://localhost:8080/" | vegeta attack -duration=5s | vegeta report
 
 ---
 
+~~~
 curl -c cookies.txt "http://127.0.0.1:8080/next"
 curl -b cookies.txt "http://127.0.0.1:8080/next"
 curl -b cookies.txt -c cookies.txt "http://127.0.0.1:8080/next" ; echo
+~~~
 
 ---
 
