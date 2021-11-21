@@ -22,6 +22,18 @@ func NewServer(settings *toml.Tree, h http.Handler) *Server {
 }
 
 func (s *Server) Serve() {
+	env := s.Settings.Get("server.env").(string)
+	switch env {
+	case "dev":
+		s.ServeDev()
+	case "fcgi":
+		s.ServeFCGI()
+	default:
+		panic("server.env not set in settings")
+	}
+}
+
+func (s *Server) ServeFCGI() {
 	port := s.Settings.Get("server.port").(int64)
 	ip := s.Settings.Get("server.ip").(string)
 

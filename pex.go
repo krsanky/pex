@@ -21,6 +21,6 @@ func Web(settings *toml.Tree) {
 	api.AddRoutes(mux)
 	server := server.NewServer(settings, mux)
 
-	fmt.Printf("server.ServeDev() port:%d\n", settings.Get("server.port").(int64))
-	server.ServeDev()
+	fmt.Printf("server.Serve() env:%s port:%d\n", settings.Get("server.env").(string), settings.Get("server.port").(int64))
+	server.Serve()
 }
