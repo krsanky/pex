@@ -1,0 +1,9 @@
+#!/bin/sh
+
+EXE=$HOME/go/bin/pex
+CMD="${EXE} settings.toml"
+
+while true; do
+	$EXE settings.toml
+	echo "${EXE} stopped \$?:$?"
+done
