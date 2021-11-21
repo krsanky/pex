@@ -67,3 +67,6 @@ ali -r 5000 http://127.0.0.1:8080/random
 echo "GET http://127.0.0.1:8080/random" | vegeta attack -rate=5000  -duration=10s | vegeta report
 ~~~
 
+http_load -rate 1000 -seconds 10 url
+(url file:http://127.0.0.1:8080/random)
+
