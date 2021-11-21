@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/pelletier/go-toml"
-	"go.d34d.net/pex"
+	"github.com/krsanky/pex"
 )
 
 func usage() {

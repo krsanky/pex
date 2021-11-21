@@ -6,8 +6,8 @@ import (
 	"net/http"
 
 	"github.com/pelletier/go-toml"
-	"go.d34d.net/pex/api"
-	"go.d34d.net/pex/server"
+	"github.com/krsanky/pex/api"
+	"github.com/krsanky/pex/server"
 )
 
 func index(w http.ResponseWriter, r *http.Request) {

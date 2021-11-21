@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"go.d34d.net/pex/lg"
+	"github.com/krsanky/pex/lg"
 )
 
 var FibIdxName string = "__pex_fib_idx__"

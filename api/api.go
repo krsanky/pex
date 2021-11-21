@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"time"
 
-	"go.d34d.net/pex/cookie"
-	"go.d34d.net/pex/fib"
-	"go.d34d.net/pex/lg"
+	"github.com/krsanky/pex/cookie"
+	"github.com/krsanky/pex/fib"
+	"github.com/krsanky/pex/lg"
 )
 
 //  0-based index into the fibonacci sequence.
