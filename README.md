@@ -23,7 +23,15 @@ previous -> 1
 * Assume that the API will be running on a small machine with 1 CPU and 512MB of RAM.
 * You may use any programming language/framework of your choice.
 
----
+# Installation
+
+~~~
+git clone https://github.com/krsanky/pex.git
+cd pex
+go install ./...
+./rc.pex
+~~~ 
+
 
 ## Assumptions:
 
