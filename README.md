@@ -25,9 +25,14 @@ previous -> 1
 
 ---
 
+## Assumptions:
+
 1. next increments, current ... does previous decrement it?
 2. is there common state, or state per client?
-
+1. State is per client.
+	Otherwise multiple clients are racing each other, and is the req/resp
+	cycle atomic to handle that.
+	If there is common state, then wrap the current -> next transition in a semaphore.
 
 ## Links
 - <https://github.com/tsenart/vegeta>
@@ -36,12 +41,6 @@ previous -> 1
 - <https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Fibonacci_Number_Program>
 - <https://medium.com/future-vision/fibonacci-sequence-algorithm-5eebae4e85be>
 
-## Assumptions:
-
-1. State is per client.
-	Otherwise multiple clients are racing each other, and is the req/resp
-	cycle atomic to handle that.
-	If there is common state, then wrap the current -> next transition in a semaphore.
 
 ## Testing
 
