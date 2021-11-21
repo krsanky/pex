@@ -26,8 +26,7 @@ func TestMemoFibTbl(t *testing.T) {
 
 	for _, d := range data {
 		if got := MemoFib(d.n); got.Int64() != d.want {
-
-			t.Errorf("Bad MemoRec value for n: %d, got: %d, want: %d", d.n, got, d.want)
+			t.Errorf("Bad MemoFib value for n: %d, got: %d, want: %d", d.n, got, d.want)
 		}
 	}
 }
