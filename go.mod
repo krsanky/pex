@@ -1,4 +1,4 @@
-module go.d34d.net/pex
+module github.com/krsanky/pex
 
 go 1.17
 
