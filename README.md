@@ -35,21 +35,15 @@ go install ./...
 
 ## Assumptions:
 
-1. next increments, current ... does previous decrement it?
-2. is there common state, or state per client?
 1. State is per client.
-	Otherwise multiple clients are racing each other, and is the req/resp
-	cycle atomic to handle that.
-	If there is common state, then wrap the current -> next transition in a semaphore.
 
 
-## Testing
+### Testing ideas
 
 ~~~
 echo "GET http://localhost:8080/" | vegeta attack -duration=5s | vegeta report
 ~~~
 
----
 
 ~~~
 curl -c cookies.txt "http://127.0.0.1:8080/next"
@@ -57,9 +51,6 @@ curl -b cookies.txt "http://127.0.0.1:8080/next"
 curl -b cookies.txt -c cookies.txt "http://127.0.0.1:8080/next" ; echo
 ~~~
 
----
-
-## More Testing ideas
 
 ~~~
 ali -r 1000 http://127.0.0.1:8080/random
@@ -67,6 +58,9 @@ ali -r 5000 http://127.0.0.1:8080/random
 echo "GET http://127.0.0.1:8080/random" | vegeta attack -rate=5000  -duration=10s | vegeta report
 ~~~
 
+~~~
 http_load -rate 1000 -seconds 10 url
 (url file:http://127.0.0.1:8080/random)
+~~~ 
+
 
